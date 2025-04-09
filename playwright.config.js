@@ -1,5 +1,3 @@
-
-// playwright.config.js
 export default {
     use: {
       headless: true,

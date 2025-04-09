@@ -14,14 +14,14 @@ export default async (to, subject, htmlContent) => {
         port: 587,
         secure: true,
         auth: {
-          user: process.env.ADMIN_MAIL,
-          pass: process.env.ADMIN_MAIL_PASSWORD,
+          user: process.env.MAIL_SENDER,
+          pass: process.env.MAIL_SENDER_PASSWORD,
         },
       })
     );
 
     await transporter.sendMail({
-      from: process.env.ADMIN_MAIL,
+      from: process.env.MAIL_SENDER,
       to: to,
       subject: subject,
       html: htmlContent,

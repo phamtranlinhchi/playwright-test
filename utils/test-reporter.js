@@ -1,4 +1,9 @@
 import sendMail from './send-mail.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const RECEIVERS = process.env.MAIL_RECEIVERS;
 
 export default class TestReporter {
   failedTests = [];
@@ -15,10 +20,7 @@ export default class TestReporter {
   async onEnd() {
     try {
       if (this.failedTests.length > 0) {
-        const receivers = [
-          'phamtranlinhchi02@gmail.com',
-          'chi.pham@svtech.com.vn',
-        ];
+        const receivers = RECEIVERS?.trim().split(',').map((email) => email.trim());
         const subject = '🔴 Playwright Test Failures Detected';
         const body = this.failedTests
           .map((t, i) => {
