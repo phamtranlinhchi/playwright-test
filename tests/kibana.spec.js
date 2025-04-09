@@ -12,7 +12,6 @@ test('Login Kibana', async ({ page }) => {
 
   await expect(page).toHaveURL(/\/kibana\/app\/home/);
 
-  const content = await page.content();
-  expect(content).toContain('Welcome home');
+  await expect(page.locator('text=Welcome home')).toBeVisible();
 
 });

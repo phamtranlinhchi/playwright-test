@@ -12,4 +12,6 @@ test('Login Radius', async ({ page }) => {
 
   await expect(page).toHaveURL(/\/home-main.php/);
 
+  await expect(page.locator('h1:text("Home")')).toBeVisible();
+
 });
