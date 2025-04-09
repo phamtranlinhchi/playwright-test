@@ -27,7 +27,7 @@ export default async (to, subject, htmlContent) => {
       html: htmlContent,
     });
     // console.log(info);
-    console.log('successfully send email');
+    console.log('Successfully send email to: ', to);
   } catch (error) {
     console.error('Error sending email:', error);
   }

@@ -13,7 +13,7 @@ export default async (text) => {
         text,
     })
         .then(response => {
-        console.log('Message sent:', response.data);
+        console.log('Successfully send telegram bot: ', response.data.result.from.username);
     })
         .catch(error => {
         console.error('Failed to send message:', error.response?.data || error.message);

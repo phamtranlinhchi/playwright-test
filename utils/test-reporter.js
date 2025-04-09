@@ -1,4 +1,5 @@
 import sendMail from './send-mail.js';
+import sendTele from './send-tele.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -28,7 +29,12 @@ export default class TestReporter {
           })
           .join('\n');
 
-        await sendMail(receivers, subject, body);
+        await Promise.all([
+          sendMail(receivers, subject, body),
+          sendTele(body),
+        ]).catch((error) => {
+          console.error('Error sending alerts:', error);
+        });
       }
     } catch (error) {
       console.error('Error handle test end:', error);
