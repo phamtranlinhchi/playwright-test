@@ -1,6 +1,7 @@
 import nodeMailer from 'nodemailer';
 import smtpTransport from 'nodemailer-smtp-transport';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 export default async (to, subject, htmlContent) => {
