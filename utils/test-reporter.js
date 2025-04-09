@@ -1,5 +1,7 @@
 import sendMail from './send-mail.js';
 import sendTele from './send-tele.js';
+
+import stripAnsi from 'strip-ansi';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -12,8 +14,8 @@ export default class TestReporter {
   onTestEnd(test, result) {
     if (result.status === 'failed') {
       this.failedTests.push({
-        title: test.title,
-        error: result.error?.message || 'Unknown error',
+        title: `Test Case: ${test.title}`,
+        error: stripAnsi(result.error?.message) || 'Unknown error',
       });
     }
   }
@@ -25,7 +27,7 @@ export default class TestReporter {
         const subject = '🔴 Playwright Test Failures Detected';
         const body = this.failedTests
           .map((t, i) => {
-            return `#${i + 1}: ${t.title}\nError: ${t.error}\n`;
+            return `#${i + 1}: ${t.title}<br />Failed: ${t.error}<br /><br />`;
           })
           .join('\n');
 
