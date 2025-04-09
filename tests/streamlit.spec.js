@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test('Streamlit page returns 200 and does not contain "value error"', async ({ page }) => {
   const response = await page.goto('/streamlit/', { waitUntil: 'domcontentloaded' });

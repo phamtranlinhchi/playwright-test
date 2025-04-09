@@ -1,8 +1,9 @@
 {
   "name": "playwright-test",
   "version": "1.0.0",
-  "main": "streamlit.js",
+  "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -10,6 +11,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@playwright/test": "^1.51.1"
+    "@playwright/test": "^1.51.1",
+    "dotenv": "^16.4.7",
+    "nodemailer": "^6.10.0",
+    "nodemailer-smtp-transport": "^2.7.4"
   }
 }
