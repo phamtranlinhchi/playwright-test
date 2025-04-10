@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.51.1-jammy
+FROM node:23.11-alpine
 
 WORKDIR /app
 
