@@ -1,0 +1,15 @@
+node_modules
+test-results
+
+*.log
+*.tmp
+*.cache
+
+.env
+
+.vscode/
+.idea/
+.DS_Store
+
+.git
+.gitignore
