@@ -8,12 +8,15 @@ test('Login Tacacsgui and Check status active', async ({ page }) => {
 
   await page.click('#kt_login_signin_submit');
 
-  await page.waitForLoadState('domcontentloaded');
+  await page.waitForURL(/\/dashboard/);
 
-  await expect(page).toHaveURL(/\/dashboard/);
+  const responsePromise = page.waitForResponse(res =>
+    res.url().includes('/api/tacacs/reports/general') && res.status() === 200
+  );
 
-  const content = await page.content();
-
-  expect(content.toLowerCase()).toContain('active');
+  const response = await responsePromise;
+  const body = await response.json();
+  const tacStatus = body.widgets?.[0]?.tac_status;
+  expect(tacStatus).toBe('active');
 
 });
