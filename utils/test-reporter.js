@@ -1,5 +1,6 @@
 import sendMail from './send-mail.js';
 import sendTele from './send-tele.js';
+import testInfo from './test-info.js';
 
 import stripAnsi from 'strip-ansi';
 import dotenv from 'dotenv';
@@ -11,10 +12,13 @@ const RECEIVERS = process.env.MAIL_RECEIVERS;
 export default class TestReporter {
   failedTests = [];
 
-  onTestEnd(test, result) {    
-    if (result.status === 'failed') {
+  onTestEnd(test, result) {      
+    if (result.status !== 'passed') {
+      const match = test.location.file.match(/\\tests\\(.+?)\.spec\.js$/);
+      const web = match ? match[1] : null;
       this.failedTests.push({
-        url: test.location.url,
+        url: testInfo[web].testUrl,
+        username: testInfo[web].testUsername,
         title: test.title,
         error: stripAnsi(result.error?.message) || 'Unknown error',
       });
@@ -34,13 +38,13 @@ export default class TestReporter {
         
         const body = `*🔴 Internal Auto Check Fail*\n${this.failedTests
           .map((t, i) => {
-            return `\n#${i + 1}: *${t.title}*\n${t.error}\n`;
+            return `\n#${i + 1}: *${t.title}*\nUrl: ${t.url}\nUsername: ${t.username}\n${t.error}\n`;
           })
-          .join('\n')}`  
+          .join('\n')}`          
           
         await Promise.all([
           // sendMail(receivers, subject, body),
-          sendTele(body),
+          await sendTele(body),
         ]).catch((error) => {
           console.error('Error sending alerts:', error);
         });

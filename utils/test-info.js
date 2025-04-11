@@ -1,3 +1,5 @@
+// NOTE: Name of the key must be the same as the name of the test file
+
 export default {
     streamlit: {
         testUrl: 'https://10.98.100.180/streamlit/',

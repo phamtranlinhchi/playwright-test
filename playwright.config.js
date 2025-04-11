@@ -4,6 +4,7 @@ export default {
       ignoreHTTPSErrors: true, 
       baseURL: 'https://10.98.100.180',
     },
+    // retries: 2,
     timeout: 20000,
     reporter: [['list'], ['./utils/test-reporter.js']]
   };
