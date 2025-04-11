@@ -57,7 +57,7 @@ export default class TestReporter {
           
         await Promise.all([
           // sendMail(receivers, subject, body),
-          await sendTele(body),
+          sendTele(body),
         ]).catch((error) => {
           console.error('Error sending alerts:', error);
         });
