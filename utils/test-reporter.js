@@ -9,6 +9,13 @@ dotenv.config();
 
 const RECEIVERS = process.env.MAIL_RECEIVERS;
 
+function truncateString(str, maxLength = 1000) {
+  if (str.length > maxLength) {
+    return str.slice(0, maxLength - 3) + '...';
+  }
+  return str;
+}
+
 export default class TestReporter {
   failedTests = [];
 
@@ -20,7 +27,7 @@ export default class TestReporter {
         url: testInfo[web].testUrl,
         username: testInfo[web].testUsername,
         title: test.title,
-        error: stripAnsi(result.error?.message.replace(/\/\/ Object\.is equality/, '')) || 'Unknown error',
+        error: truncateString(stripAnsi(result.error?.message.replace(/\/\/ Object\.is equality/, ''))) || 'Unknown error',
       });
     }
   }
