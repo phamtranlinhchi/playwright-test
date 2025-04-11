@@ -2,7 +2,7 @@
 
 export default {
     streamlit: {
-        testUrl: 'https://10.98.100.180/streamli/',
+        testUrl: 'https://10.98.100.180/streamlit/',
         testTitle: '[STREAMLIT] Page should return 200 and should not contain "value error"'
     },
     rundeck: {
