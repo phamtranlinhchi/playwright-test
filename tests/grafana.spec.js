@@ -12,9 +12,9 @@ test(testTitle, async ({ page }) => {
 
   await page.click('button[type="submit"]');
 
-  await page.waitForLoadState('domcontentloaded');
+  await page.waitForURL(/\/grafana\/d\/m22zwHQ4k\/home\?orgId=1&refresh=1m/)
 
-  await expect(page).toHaveURL(/\/grafana\/d\/m22zwHQ4k\/home\?orgId=1&refresh=1m/);
+  await page.waitForLoadState('domcontentloaded');
 
   const cookies = await page.context().cookies();
   const session = cookies.find(c => c.name === 'grafana_session');

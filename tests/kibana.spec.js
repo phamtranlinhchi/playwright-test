@@ -13,11 +13,9 @@ test(testTitle, async ({ page }) => {
 
   await page.click('button[type="submit"]'); 
 
-  await page.waitForLoadState('domcontentloaded');
-
   await page.waitForURL(/\/kibana\/app\/home/);
-
-  await expect(page).toHaveURL(/\/kibana\/app\/home/);
+  
+  await page.waitForLoadState('domcontentloaded');
 
   await expect(page.locator('text=Welcome home')).toBeVisible();
 

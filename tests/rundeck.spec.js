@@ -13,7 +13,7 @@ test(testTitle, async ({ page }) => {
 
   await page.click('#btn-login');
 
-  await page.waitForLoadState('domcontentloaded');
+  await page.waitForURL(/\/menu\/home/)
 
-  await expect(page).toHaveURL(/\/menu\/home/);
+  await page.waitForLoadState('domcontentloaded');
 });

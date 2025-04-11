@@ -11,9 +11,9 @@ test(testTitle, async ({ page }) => {
 
   await page.click('button[type="submit"]');
 
+  await page.waitForURL(/\/home-main.php/);
+  
   await page.waitForLoadState('domcontentloaded');
-
-  await expect(page).toHaveURL(/\/home-main.php/);
 
   await expect(page.locator('h1:text("Home")')).toBeVisible();
 
