@@ -21,7 +21,7 @@ export default class TestReporter {
 
   onTestEnd(test, result) {      
     if (result.status !== 'passed') {      
-      const match = test.location.file.match(/\\tests\\(.+?)\.spec\.js$/);
+      const match = test.location.file.match(/[/\\]tests[/\\](.+?)\.spec\.js$/);
       const web = match ? match[1] : null;
       this.failedTests.push({
         url: testInfo[web].testUrl,
