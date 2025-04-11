@@ -1,12 +1,15 @@
 import { test, expect } from '@playwright/test';
+import testInfo from '../utils/test-info.js';
 
-test('Rundeck login successfully', async ({ page }) => {
-  const response = await page.goto('/rundeck', { waitUntil: 'domcontentloaded'});
+const { testUrl, testTitle, testUsername, testPassword } = testInfo.rundeck;
+
+test(testTitle, async ({ page }) => {
+  const response = await page.goto(testUrl, { waitUntil: 'domcontentloaded'});
 
   expect(response.status()).toBe(200);
 
-  await page.fill('input[name="j_username"]', 'thrukadmin');
-  await page.fill('input[name="j_password"]', 'thrukadmin');
+  await page.fill('input[name="j_username"]', testUsername);
+  await page.fill('input[name="j_password"]', testPassword);
 
   await page.click('#btn-login');
 

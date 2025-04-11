@@ -1,14 +1,21 @@
 import { test, expect } from '@playwright/test';
+import testInfo from '../utils/test-info.js';
 
-test('Login Kibana', async ({ page }) => {
-  await page.goto('https://10.98.100.186/kibana/login?next=%2Fkibana%2F');
+const { testUrl, testTitle, testUsername, testPassword } = testInfo.kibana;
 
-  await page.fill('input[name="username"]', 'elastic');
-  await page.fill('input[name="password"]', 'juniper@123');
+test(testTitle, async ({ page }) => {
+  const response = await page.goto(testUrl, { waitUntil: 'domcontentloaded' });
+
+  expect(response.status()).toBe(200);
+
+  await page.fill('input[name="username"]', testUsername);
+  await page.fill('input[name="password"]', testPassword);
 
   await page.click('button[type="submit"]'); 
 
   await page.waitForLoadState('domcontentloaded');
+
+  await page.waitForURL(/\/kibana\/app\/home/);
 
   await expect(page).toHaveURL(/\/kibana\/app\/home/);
 

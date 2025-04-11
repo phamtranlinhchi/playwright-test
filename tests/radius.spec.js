@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
+import testInfo from '../utils/test-info.js';
 
-test('Login Radius', async ({ page }) => {
-  await page.goto('http://10.98.100.182:8000/login.php');
+const { testUrl, testTitle, testUsername, testPassword } = testInfo.radius;
 
-  await page.fill('input[name="operator_user"]', 'administrator');
-  await page.fill('input[name="operator_pass"]', 'radius');
+test(testTitle, async ({ page }) => {
+  await page.goto(testUrl, { waitUntil: 'domcontentloaded' });
+
+  await page.fill('input[name="operator_user"]', testUsername);
+  await page.fill('input[name="operator_pass"]', testPassword);
 
   await page.click('button[type="submit"]');
 

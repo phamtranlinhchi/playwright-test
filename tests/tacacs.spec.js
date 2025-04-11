@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
+import testInfo from '../utils/test-info.js';
 
-test('Login Tacacsgui and Check status active', async ({ page }) => {
-  await page.goto('https://10.98.100.120:4443/auth/login');
+const { testUrl, testTitle, testUsername, testPassword } = testInfo.tacacs;
 
-  await page.fill('input[placeholder="Username"]', 'tacgui');
-  await page.fill('input[placeholder="Password"]', 'juniper@123');
+test(testTitle, async ({ page }) => {
+  await page.goto(testUrl, { waitUntil: 'domcontentloaded' });
+
+  await page.fill('input[placeholder="Username"]', testUsername);
+  await page.fill('input[placeholder="Password"]', testPassword);
 
   await page.click('#kt_login_signin_submit');
 

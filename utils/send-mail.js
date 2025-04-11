@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const MAIL_SENDER = process.env.MAIL_SENDER;
+const MAIL_SENDER_PASSWORD = process.env.MAIL_SENDER_PASSWORD;
+
 export default async (to, subject, htmlContent) => {
   try {
     
@@ -14,14 +17,14 @@ export default async (to, subject, htmlContent) => {
         port: 587,
         secure: true,
         auth: {
-          user: process.env.MAIL_SENDER,
-          pass: process.env.MAIL_SENDER_PASSWORD,
+          user: MAIL_SENDER,
+          pass: MAIL_SENDER_PASSWORD,
         },
       })
     );
 
     await transporter.sendMail({
-      from: process.env.MAIL_SENDER,
+      from: MAIL_SENDER,
       to: to,
       subject: subject,
       html: htmlContent,

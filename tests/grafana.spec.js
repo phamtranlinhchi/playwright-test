@@ -1,10 +1,14 @@
 import { test, expect } from '@playwright/test';
+import testInfo from '../utils/test-info.js';
 
-test('Login Grafana', async ({ page }) => {
-  await page.goto('http://10.98.100.188/grafana/login');
+const { testUrl, testTitle, testUsername, testPassword } = testInfo.grafana;
 
-  await page.fill('input[name="user"]', 'thrukadmin');
-  await page.fill('input[name="password"]', 'thrukadmin');
+test(testTitle, async ({ page }) => {
+  const response = await page.goto(testUrl, { waitUntil: 'domcontentloaded' });
+  expect(response.status()).toBe(200);
+
+  await page.fill('input[name="user"]', testUsername);
+  await page.fill('input[name="password"]', testPassword);
 
   await page.click('button[type="submit"]');
 
@@ -15,5 +19,4 @@ test('Login Grafana', async ({ page }) => {
   const cookies = await page.context().cookies();
   const session = cookies.find(c => c.name === 'grafana_session');
   expect(session).toBeTruthy();
-
 });

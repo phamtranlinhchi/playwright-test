@@ -22,7 +22,7 @@ metadata:
   name: playwright-test
   namespace: monitoring
 spec:
-  schedule: "0 * * * *"  # each 1 hour
+  schedule: "*/5 * * * *"  # each 5 minutes
   jobTemplate:
     spec:
       backoffLimit: 3

@@ -11,10 +11,11 @@ const RECEIVERS = process.env.MAIL_RECEIVERS;
 export default class TestReporter {
   failedTests = [];
 
-  onTestEnd(test, result) {
+  onTestEnd(test, result) {    
     if (result.status === 'failed') {
       this.failedTests.push({
-        title: `Test Case: ${test.title}`,
+        url: test.location.url,
+        title: test.title,
         error: stripAnsi(result.error?.message) || 'Unknown error',
       });
     }
@@ -23,17 +24,23 @@ export default class TestReporter {
   async onEnd() {
     try {
       if (this.failedTests.length > 0) {
-        const receivers = RECEIVERS?.trim().split(',').map((email) => email.trim());
-        const subject = '🔴 Playwright Test Failures Detected';
-        const body = this.failedTests
+        // const receivers = RECEIVERS?.trim().split(',').map((email) => email.trim());
+        // const subject = '🔴 Playwright Test Failures Detected';
+        // const body = this.failedTests
+        //   .map((t, i) => {
+        //     return `#${i + 1}: ${t.title}<br />Failed: ${t.error}<br /><br />`;
+        //   })
+        //   .join('\n');
+        
+        const body = `*🔴 Internal Auto Check Fail*\n${this.failedTests
           .map((t, i) => {
-            return `#${i + 1}: ${t.title}<br />Failed: ${t.error}<br /><br />`;
+            return `\n#${i + 1}: *${t.title}*\n${t.error}\n`;
           })
-          .join('\n');
-
+          .join('\n')}`  
+          
         await Promise.all([
-          sendMail(receivers, subject, body),
-          // sendTele(body),
+          // sendMail(receivers, subject, body),
+          sendTele(body),
         ]).catch((error) => {
           console.error('Error sending alerts:', error);
         });
