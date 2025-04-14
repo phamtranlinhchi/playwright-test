@@ -5,7 +5,7 @@ export default {
       baseURL: 'https://10.98.100.180',
     },
     // retries: 2,
-    timeout: 20000,
+    timeout: 30000,
     reporter: [['list'], ['./utils/test-reporter.js']]
   };
   

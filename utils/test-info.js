@@ -1,6 +1,12 @@
 // NOTE: Name of the key must be the same as the name of the test file
 
 export default {
+    bng: {
+        testUrl: 'https://10.98.100.180/bngblaster',
+        testTitle: '[BNGBLASTER] Login Page should return 200 and login successfully',
+        testUsername: 'admin',
+        testPassword: 'admin@123',
+    },
     streamlit: {
         testUrl: 'https://10.98.100.180/streamlit/',
         testTitle: '[STREAMLIT] Page should return 200 and should not contain "value error"'
