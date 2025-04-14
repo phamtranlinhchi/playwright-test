@@ -35,4 +35,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: playwright-env
-          restartPolicy: OnFailure
+              env:
+              - name: TZ
+                value: Asia/Ho_Chi_Minh
+          terminationGracePeriodSeconds: 100
