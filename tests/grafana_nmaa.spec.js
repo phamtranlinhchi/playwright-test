@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import testInfo from '../utils/test-info.js';
 
-const { testUrl, testTitle, testUsername, testPassword } = testInfo.grafana;
+const { testUrl, testTitle, testUsername, testPassword } = testInfo.grafana_nmaa;
 
 test(testTitle, async ({ page }) => {
   const response = await page.goto(testUrl, { waitUntil: 'domcontentloaded' });
@@ -12,8 +12,8 @@ test(testTitle, async ({ page }) => {
 
   await page.click('button[type="submit"]');
 
-  await page.waitForURL(/\/grafana\/d\/m22zwHQ4k\/home\?orgId=1&refresh=1m/)
-
+  await page.waitForURL(/\/grafana\/\?orgId=1/);
+  
   await page.waitForLoadState('domcontentloaded');
 
   const cookies = await page.context().cookies();

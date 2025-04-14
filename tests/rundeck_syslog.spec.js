@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import testInfo from '../utils/test-info.js';
 
-const { testUrl, testTitle, testUsername, testPassword } = testInfo.rundeck;
+const { testUrl, testTitle, testUsername, testPassword } = testInfo.rundeck_syslog;
 
 test(testTitle, async ({ page }) => {
   const response = await page.goto(testUrl, { waitUntil: 'domcontentloaded'});
@@ -11,7 +11,7 @@ test(testTitle, async ({ page }) => {
   await page.fill('input[name="j_username"]', testUsername);
   await page.fill('input[name="j_password"]', testPassword);
 
-  await page.click('#btn-login');
+  await page.click('button[type="submit"]');
 
   await page.waitForURL(/\/menu\/home/)
 
