@@ -36,7 +36,7 @@ spec:
                 - secretRef:
                     name: playwright-env
               env:
-              - name: TZ
-                value: Asia/Ho_Chi_Minh
+                - name: TZ
+                  value: Asia/Ho_Chi_Minh
           terminationGracePeriodSeconds: 100
           restartPolicy: Never
