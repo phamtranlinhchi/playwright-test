@@ -15,8 +15,7 @@ test(testTitle, async ({ page }) => {
 
   await page.waitForURL(/\/icingaweb\/dashboard/);
   
-  const respose_afterlogin = await page.waitForLoadState('domcontentloaded');
-
+  await page.waitForLoadState('domcontentloaded');
 
   await expect(page.locator('text=Dashboard')).toBeVisible();
 });
