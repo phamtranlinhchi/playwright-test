@@ -25,7 +25,7 @@ spec:
   schedule: "*/5 * * * *"  # each 5 minutes
   jobTemplate:
     spec:
-      backoffLimit: 3
+      backoffLimit: 0
       template:
         spec:
           containers:
